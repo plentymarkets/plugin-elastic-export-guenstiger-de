@@ -1,0 +1,9 @@
+{
+  "name": "ElasticExportGuenstigerDE",
+  "description": "This plugin adds the format GuenstigerDE to the Elastic Export.",
+  "namespace": "ElasticExportGuenstigerDE",
+  "author": "plentymarkets",
+  "type": "export",
+  "serviceProvider": "ElasticExportGuenstigerDE\\ElasticExportGuenstigerDEServiceProvider",
+  "version": 0.1
+}
