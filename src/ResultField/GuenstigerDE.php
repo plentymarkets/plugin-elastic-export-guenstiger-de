@@ -75,7 +75,10 @@ class GuenstigerDE extends ResultFields
          * @var ImageMutator $imageMutator
          */
         $imageMutator = pluginApp(ImageMutator::class);
-        $imageMutator->addMarket($reference);
+        if($imageMutator instanceof ImageMutator)
+        {
+            $imageMutator->addMarket($reference);
+        }
 
         /**
          * @var LanguageMutator $languageMutator
