@@ -1,5 +1,5 @@
 
-# User Guide für das Elastic Export Guenstiger.de Plugin
+# User Guide für das ElasticExportGuenstigerDE Plugin
 
 <div class="container-toc"></div>
 
@@ -11,7 +11,7 @@ Guenstiger.de ist ein Preisvergleichsportal, das neben Preisvergleichen auch Nut
 
 Um dieses Format nutzen zu können, benötigen Sie das Plugin Elastic Export.
 
-Nachdem Sie das Elastic Export Guenstiger.de Plugin im plentyMarketplace gekauft haben, richten Sie das Exportformat wie auf der Handbuchseite [Daten exportieren](https://www.plentymarkets.eu/handbuch/datenaustausch/daten-exportieren/#4) beschrieben ein.
+Nachdem Sie das ElasticExportGuenstigerDE Plugin im plentyMarketplace gekauft haben, richten Sie das Exportformat wie auf der Handbuchseite [Daten exportieren](https://www.plentymarkets.eu/handbuch/datenaustausch/daten-exportieren/#4) beschrieben ein.
 
 ## Lizenz
 
