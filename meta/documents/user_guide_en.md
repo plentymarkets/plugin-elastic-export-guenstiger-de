@@ -1,5 +1,5 @@
 
-# Elastic Export Guenstiger.de Plugin user guide
+# ElasticExportGuenstigerDE plugin user guide
 
 <div class="container-toc"></div>
 
@@ -11,7 +11,7 @@ Guenstiger.de is a German price comparison portal that also offers customer opin
 
 To use this format, you need the Elastic Export plugin.
 
-Follow the instructions given on the [Exporting data](https://www.plentymarkets.co.uk/manual/data-exchange/exporting-data/#4) page of the manual to set up Guenstiger.de plugin in plentymarkets.
+Follow the instructions given on the [Exporting data](https://www.plentymarkets.co.uk/manual/data-exchange/exporting-data/#4) page of the manual to set up the format GuenstigerDE-Plugin in plentymarkets.
 
 ## License
 
