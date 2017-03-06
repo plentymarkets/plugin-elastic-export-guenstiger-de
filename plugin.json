@@ -8,8 +8,8 @@
   "price": 0.00,
   "description": "This plugin adds the format Guenstiger.de to the Elastic Export.",
   "shortDescription": {
-    "de": "Das Plugin ElasticExportGuenstigerDE fügt das Datenformat Guenstiger.de zum Elastischen Export hinzu.",
-    "en": "This plugin adds the format Guenstiger.de to the Elastic Export."
+    "de": "Das Plugin ElasticExportGuenstigerDE fügt das Datenformat GuenstigerDE-Plugin zum Elastischen Export hinzu.",
+    "en": "This plugin adds the format GuenstigerDE-Plugin to the Elastic Export."
   },
   "categories": [
     "3523"
