@@ -5,7 +5,9 @@ namespace ElasticExportGuenstigerDE\ResultField;
 use Plenty\Modules\Cloud\ElasticSearch\Lib\Source\Mutator\BuiltIn\LanguageMutator;
 use Plenty\Modules\DataExchange\Contracts\ResultFields;
 use Plenty\Modules\Helper\Services\ArrayHelper;
+use Plenty\Modules\Item\Search\Mutators\DefaultCategoryMutator;
 use Plenty\Modules\Item\Search\Mutators\ImageMutator;
+use Plenty\Modules\Item\Search\Mutators\KeyMutator;
 
 
 /**
@@ -18,7 +20,6 @@ class GuenstigerDE extends ResultFields
      * @var ArrayHelper
      */
     private $arrayHelper;
-
 
     /**
      * GuenstigerDE constructor.
@@ -81,9 +82,28 @@ class GuenstigerDE extends ResultFields
         }
 
         /**
+         * @var KeyMutator $keyMutator
+         */
+        $keyMutator = pluginApp(KeyMutator::class);
+        if($keyMutator instanceof KeyMutator)
+        {
+            $keyMutator->setKeyList($this->getKeyList());
+            $keyMutator->setNestedKeyList($this->getNestedKeyList());
+        }
+
+        /**
          * @var LanguageMutator $languageMutator
          */
         $languageMutator = pluginApp(LanguageMutator::class, [[$settings->get('lang')]]);
+
+        /**
+         * @var DefaultCategoryMutator $defaultCategoryMutator
+         */
+        $defaultCategoryMutator = pluginApp(DefaultCategoryMutator::class);
+        if($defaultCategoryMutator instanceof DefaultCategoryMutator)
+        {
+            $defaultCategoryMutator->setPlentyId($settings->get('plentyId'));
+        }
 
         // Fields
         $fields = [
@@ -95,10 +115,7 @@ class GuenstigerDE extends ResultFields
                 //variation
                 'id',
                 'variation.availability.id',
-
-                //unit
-                'unit.content',
-                'unit.id',
+                'variation.model',
 
                 //images
                 'images.all.urlMiddle',
@@ -122,14 +139,36 @@ class GuenstigerDE extends ResultFields
                 'images.variation.path',
                 'images.variation.position',
 
+                //unit
+                'unit.content',
+                'unit.id',
+
+                //defaultCategories
+                'defaultCategories.id',
+
                 //barcodes
                 'barcodes.code',
                 'barcodes.type',
+
+                //attributes
+                'attributes.attributeValueSetId',
+                'attributes.attributeId',
+                'attributes.valueId',
+                'attributes.names.name',
+                'attributes.names.lang',
+
+                //properties
+                'properties.property.id',
+                'properties.property.valueType',
+                'properties.selection.name',
+                'properties.texts.value'
             ],
 
             [
                 //mutators
+                $keyMutator,
                 $languageMutator,
+                $defaultCategoryMutator
             ],
         ];
 
@@ -146,5 +185,130 @@ class GuenstigerDE extends ResultFields
         }
 
         return $fields;
+    }
+
+    /**
+     * Returns the list of keys.
+     *
+     * @return array
+     */
+    private function getKeyList()
+    {
+        $keyList = [
+            //item
+            'item.id',
+            'item.manufacturer.id',
+
+            //variation
+            'variation.availability.id',
+            'variation.model',
+
+            //unit
+            'unit.content',
+            'unit.id',
+        ];
+
+        return $keyList;
+    }
+
+    /**
+     * Returns the list of nested keys.
+     *
+     * @return mixed
+     */
+    private function getNestedKeyList()
+    {
+        $nestedKeyList['keys'] = [
+            //images
+            'images.all',
+            'images.item',
+            'images.variation',
+
+            //texts
+            'texts',
+
+            //defaultCategories
+            'defaultCategories',
+
+            //barcodes
+            'barcodes',
+
+            //attributes
+            'attributes',
+
+            //properties
+            'properties'
+        ];
+
+        $nestedKeyList['nestedKeys'] = [
+            //images
+            'images.all' => [
+                'urlMiddle',
+                'urlPreview',
+                'urlSecondPreview',
+                'url',
+                'path',
+                'position',
+            ],
+
+            'images.item' => [
+                'urlMiddle',
+                'urlPreview',
+                'urlSecondPreview',
+                'url',
+                'path',
+                'position',
+            ],
+
+            'images.variation' => [
+                'urlMiddle',
+                'urlPreview',
+                'urlSecondPreview',
+                'url',
+                'path',
+                'position',
+            ],
+
+            //texts
+            'texts' => [
+                'urlPath',
+                'name1',
+                'name2',
+                'name3',
+                'shortDescription',
+                'description',
+                'technicalData',
+            ],
+
+            //defaultCategories
+            'defaultCategories' => [
+                'id'
+            ],
+
+            //barcodes
+            'barcodes' => [
+                'code',
+                'type',
+            ],
+
+            //attributes
+            'attributes' => [
+                'attributeValueSetId',
+                'attributeId',
+                'valueId',
+                'names.name',
+                'names.lang',
+            ],
+
+            //proprieties
+            'properties'    => [
+                'property.id',
+                'property.valueType',
+                'selection.name',
+                'texts.value'
+            ]
+        ];
+
+        return $nestedKeyList;
     }
 }

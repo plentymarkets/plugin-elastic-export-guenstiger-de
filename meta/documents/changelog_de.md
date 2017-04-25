@@ -1,5 +1,13 @@
 # Release Notes für Elastic Export Guenstiger.de
 
+## v1.0.3 (2017-04-25)
+
+### Behoben
+- Die Logs werden nun korrekt übersetzt.
+- Die Array-Definition der Result Fields sind nun für den KeyMutator korrekt angegeben.
+- Der Bestand wird nun korrekt berechnet.
+- Die Zahlungsarten werden nun korrekt ermittelt.
+
 ## v1.0.2 (2017-03-22)
 
 ### Behoben
