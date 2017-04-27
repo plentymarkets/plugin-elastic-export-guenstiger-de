@@ -280,11 +280,11 @@ class GuenstigerDE extends CSVPluginGenerator
     {
         $availabilityDays = $this->elasticExportHelper->getAvailability($variation, $settings, false);
 
-        if($availabilityDays <= 1)
+        if($availabilityDays > 0)
         {
-            return '1 x Tag';
+            return $availabilityDays . ' x Tag(en)';
         }
 
-        return $availabilityDays . ' x Tagen';
+        return '';
     }
 }
