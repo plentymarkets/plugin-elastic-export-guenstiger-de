@@ -2,7 +2,6 @@
 
 namespace ElasticExportGuenstigerDE\Helper;
 
-use Plenty\Legacy\Repositories\Item\SalesPrice\SalesPriceSearchRepository;
 use Plenty\Modules\Helper\Models\KeyValue;
 use Plenty\Modules\Item\SalesPrice\Contracts\SalesPriceSearchRepositoryContract;
 use Plenty\Modules\Item\SalesPrice\Models\SalesPriceSearchRequest;
@@ -19,13 +18,22 @@ class PriceHelper
     private $salesPriceSearchRepository;
 
     /**
+     * @var SalesPriceSearchRequest
+     */
+    private $salesPriceSearchRequest;
+
+    /**
      * PriceHelper constructor.
      *
-     * @param SalesPriceSearchRepositoryContract $salesPriceSearchRepository
+     * @param SalesPriceSearchRepositoryContract $salesPriceSearchRepositoryContract
+     * @param SalesPriceSearchRequest $salesPriceSearchRequest
      */
-    public function __construct(SalesPriceSearchRepositoryContract $salesPriceSearchRepository)
+    public function __construct(
+        SalesPriceSearchRepositoryContract $salesPriceSearchRepositoryContract,
+        SalesPriceSearchRequest $salesPriceSearchRequest)
     {
-        $this->salesPriceSearchRepository = $salesPriceSearchRepository;
+        $this->salesPriceSearchRepository = $salesPriceSearchRepositoryContract;
+        $this->salesPriceSearchRequest = $salesPriceSearchRequest;
     }
 
     /**
@@ -39,25 +47,22 @@ class PriceHelper
     {
         $variationPrice = 0.00;
 
-        /**
-         * SalesPriceSearchRequest $salesPriceSearchRequest
-         */
-        $salesPriceSearchRequest = pluginApp(SalesPriceSearchRequest::class);
-        if($salesPriceSearchRequest instanceof SalesPriceSearchRequest)
+        if($this->salesPriceSearchRequest instanceof SalesPriceSearchRequest)
         {
-            $salesPriceSearchRequest->variationId = $variation['id'];
-            $salesPriceSearchRequest->referrerId = $settings->get('referrerId');
+            $this->salesPriceSearchRequest->variationId = $variation['id'];
+            $this->salesPriceSearchRequest->referrerId = $settings->get('referrerId');
+            $this->salesPriceSearchRequest->type = 'default';
         }
 
         // getting the retail price
-        $salesPriceSearch = $this->salesPriceSearchRepository->search($salesPriceSearchRequest);
+        $salesPriceSearch = $this->salesPriceSearchRepository->search($this->salesPriceSearchRequest);
         if($salesPriceSearch instanceof SalesPriceSearchResponse)
         {
             $variationPrice = (float)$salesPriceSearch->price;
         }
 
         return array(
-            'variationRetailPrice.price' =>  $variationPrice
+            'variationRetailPrice.price' => $variationPrice
         );
     }
 }

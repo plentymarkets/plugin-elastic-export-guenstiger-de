@@ -16,6 +16,8 @@ use Plenty\Modules\Item\Search\Mutators\KeyMutator;
  */
 class GuenstigerDE extends ResultFields
 {
+    const ALL_MARKET_REFERENCE = -1;
+
     /**
      * @var ArrayHelper
      */
@@ -78,7 +80,11 @@ class GuenstigerDE extends ResultFields
         $imageMutator = pluginApp(ImageMutator::class);
         if($imageMutator instanceof ImageMutator)
         {
+            // add image reference for a specific market
             $imageMutator->addMarket($reference);
+
+            // add image reference -1 when the image is available for all markets
+            $imageMutator->addMarket(self::ALL_MARKET_REFERENCE);
         }
 
         /**

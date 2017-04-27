@@ -4,12 +4,9 @@ namespace ElasticExportGuenstigerDE\Generator;
 
 use ElasticExport\Helper\ElasticExportCoreHelper;
 use ElasticExportGuenstigerDE\Helper\PriceHelper;
-use ElasticExportGuenstigerDE\Helper\PropertyHelper;
 use ElasticExportGuenstigerDE\Helper\StockHelper;
 use Plenty\Modules\DataExchange\Contracts\CSVPluginGenerator;
 use Plenty\Modules\Helper\Services\ArrayHelper;
-use Plenty\Modules\Item\DataLayer\Models\Record;
-use Plenty\Modules\Item\DataLayer\Models\RecordList;
 use Plenty\Modules\Helper\Models\KeyValue;
 use Plenty\Modules\Item\Search\Contracts\VariationElasticSearchScrollRepositoryContract;
 use Plenty\Plugin\Log\Loggable;
@@ -46,29 +43,21 @@ class GuenstigerDE extends CSVPluginGenerator
     private $stockHelper;
 
     /**
-     * @var PropertyHelper
-     */
-    private $propertyHelper;
-
-    /**
      * GuenstigerDE constructor.
      *
      * @param ArrayHelper $arrayHelper
      * @param PriceHelper $priceHelper
      * @param StockHelper $stockHelper
-     * @param PropertyHelper $propertyHelper
      */
     public function __construct(
         ArrayHelper $arrayHelper,
         PriceHelper $priceHelper,
-        StockHelper $stockHelper,
-        PropertyHelper $propertyHelper
+        StockHelper $stockHelper
     )
     {
         $this->arrayHelper = $arrayHelper;
         $this->priceHelper = $priceHelper;
         $this->stockHelper = $stockHelper;
-        $this->propertyHelper = $propertyHelper;
     }
 
     /**
@@ -177,15 +166,19 @@ class GuenstigerDE extends CSVPluginGenerator
     private function head():array
     {
         return array(
-            'bezeichnung',
-            'preis',
-            'deeplink',
-            'ean',
-            'beschreibung',
-            'bilderlink',
-            'lieferzeiten',
-            'lieferkosten',
-            'grundpreis',
+            'EAN',
+            'ISBN',
+            'HerstellerArtNr',
+            'Hersteller',
+            'Produktname',
+            'Beschreibung',
+            'Preis',
+            'Klick-Out-URL',
+            'Kategorie',
+            'Bild-URL',
+            'Lieferzeit',
+            'Lieferkosten',
+            'Grundpreis',
         );
     }
 
@@ -212,21 +205,26 @@ class GuenstigerDE extends CSVPluginGenerator
             if($priceList['variationRetailPrice.price'] > 0)
             {
                 // Get delivery costs
-                $shippingCost = $this->getDeliveryCosts($variation, $settings);
+                $deliveryCost = $this->getDeliveryCosts($variation, $settings);
+                $deliveryTime = $this->getDeliveryTime($variation, $settings);
 
                 // Get base price
                 $basePrice = number_format((float)$this->elasticExportHelper->getBasePrice($variation, $priceList, $settings->get('lang')), 2, '.', '');
 
                 $data = [
-                    'bezeichnung'   => $this->elasticExportHelper->getName($variation, $settings, 256),
-                    'preis'         => number_format((float)$priceList['variationRetailPrice.price'], 2, '.', ''),
-                    'deeplink'      => $this->elasticExportHelper->getUrl($variation, $settings, true, false),
-                    'ean'           => $this->elasticExportHelper->getBarcodeByType($variation, $settings->get('barcode')),
-                    'beschreibung'  => $this->elasticExportHelper->getDescription($variation, $settings, 256),
-                    'bilderlink'    => $this->elasticExportHelper->getMainImage($variation, $settings),
-                    'lieferzeiten'  => $this->elasticExportHelper->getAvailability($variation, $settings),
-                    'lieferkosten'  => $shippingCost,
-                    'grundpreis'    => strlen($basePrice) ? $basePrice : '',
+                    'EAN'               => $this->elasticExportHelper->getBarcodeByType($variation, $settings->get('barcode')),
+                    'ISBN'              => $this->elasticExportHelper->getBarcodeByType($variation, ElasticExportCoreHelper::BARCODE_ISBN),
+                    'HerstellerArtNr'   => strlen($variation['data']['variation']['model']) ? $variation['data']['variation']['model'] : '',
+                    'Hersteller'        => $this->elasticExportHelper->getExternalManufacturerName((int)$variation['data']['item']['manufacturer']['id']),
+                    'Produktname'       => $this->elasticExportHelper->getName($variation, $settings, 256),
+                    'Beschreibung'      => $this->elasticExportHelper->getDescription($variation, $settings, 256),
+                    'Preis'             => number_format((float)$priceList['variationRetailPrice.price'], 2, '.', ''),
+                    'Klick-Out-URL'     => $this->elasticExportHelper->getUrl($variation, $settings, true, false),
+                    'Kategorie'         => $this->elasticExportHelper->getCategory((int)$variation['data']['defaultCategories'][0]['id'], $settings->get('lang'), $settings->get('plentyId')),
+                    'Bild-URL'          => $this->elasticExportHelper->getMainImage($variation, $settings),
+                    'Lieferzeit'        => $deliveryTime,
+                    'Lieferkosten'      => $deliveryCost,
+                    'Grundpreis'        => strlen($basePrice) ? $basePrice : '',
                 ];
 
                 $this->addCSVContent(array_values($data));
@@ -269,5 +267,24 @@ class GuenstigerDE extends CSVPluginGenerator
         }
 
         return '';
+    }
+
+    /**
+     * Get the delivery time for a variation.
+     *
+     * @param $variation
+     * @param KeyValue $settings
+     * @return string
+     */
+    private function getDeliveryTime($variation, KeyValue $settings):string
+    {
+        $availabilityDays = $this->elasticExportHelper->getAvailability($variation, $settings, false);
+
+        if($availabilityDays <= 1)
+        {
+            return '1 x Tag';
+        }
+
+        return $availabilityDays . ' x Tagen';
     }
 }

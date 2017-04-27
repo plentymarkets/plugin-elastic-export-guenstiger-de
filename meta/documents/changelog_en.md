@@ -1,12 +1,12 @@
 # Release Notes for Elastic Export Guenstiger.de
 
-## v1.0.3 (2017-04-25)
+## v1.0.3 (2017-04-27)
 
 ### Fixed
 - Logs are now correctly translated.
 - The array definitions of the result fields are now correctly defined for the KeyMutator.
 - Stock is now correctly calculated.
-- Payment Methods are now correctly evaluated.
+- Price is now correctly calculated.
 
 ## v1.0.2 (2017-03-22)
 
