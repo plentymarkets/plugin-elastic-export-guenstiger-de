@@ -3,6 +3,7 @@
 namespace ElasticExportGuenstigerDE\Generator;
 
 use ElasticExport\Helper\ElasticExportCoreHelper;
+use ElasticExport\Helper\ElasticExportStockHelper;
 use ElasticExportGuenstigerDE\Helper\PriceHelper;
 use ElasticExportGuenstigerDE\Helper\StockHelper;
 use Plenty\Modules\DataExchange\Contracts\CSVPluginGenerator;
@@ -38,7 +39,7 @@ class GuenstigerDE extends CSVPluginGenerator
     private $priceHelper;
 
     /**
-     * @var StockHelper
+     * @var ElasticExportStockHelper
      */
     private $stockHelper;
 
@@ -47,12 +48,12 @@ class GuenstigerDE extends CSVPluginGenerator
      *
      * @param ArrayHelper $arrayHelper
      * @param PriceHelper $priceHelper
-     * @param StockHelper $stockHelper
+     * @param ElasticExportStockHelper $stockHelper
      */
     public function __construct(
         ArrayHelper $arrayHelper,
         PriceHelper $priceHelper,
-        StockHelper $stockHelper
+        ElasticExportStockHelper $stockHelper
     )
     {
         $this->arrayHelper = $arrayHelper;
