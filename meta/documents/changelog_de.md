@@ -1,5 +1,19 @@
 # Release Notes für Elastic Export Guenstiger.de
 
+## v1.0.3 (2017-05-03)
+
+### Hinzugefügt
+- Die Abhängigkeit zum Elastic Export Plugin wurde in der plugin.json ergänzt.
+
+### Geändert
+- Die Bestandsfilterlogik wurde in das Elastic Export-Plugin ausgelagert.
+
+### Behoben
+- Die Logs werden nun korrekt übersetzt.
+- Die Array-Definition der Result Fields sind nun für den KeyMutator korrekt angegeben.
+- Der Bestand wird nun korrekt berechnet.
+- Der Preis wird nun korrekt berechnet.
+
 ## v1.0.2 (2017-03-22)
 
 ### Behoben

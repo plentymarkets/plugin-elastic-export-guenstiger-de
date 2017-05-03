@@ -32,6 +32,7 @@ class ElasticExportGuenstigerDEServiceProvider extends DataExchangeServiceProvid
             'ElasticExportGuenstigerDE\ResultField\GuenstigerDE',
             'ElasticExportGuenstigerDE\Generator\GuenstigerDE',
             '',
+            true,
             true
         );
     }
