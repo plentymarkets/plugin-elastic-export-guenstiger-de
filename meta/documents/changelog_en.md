@@ -1,6 +1,12 @@
 # Release Notes for Elastic Export Guenstiger.de
 
-## v1.0.3 (2017-04-27)
+## v1.0.3 (2017-05-03)
+
+### Added
+- The dependency to the Elastic Export plugin was added to the plugin.json.
+
+### Changed
+- Outsourced the stock filter logic to the Elastic Export plugin.
 
 ### Fixed
 - Logs are now correctly translated.
