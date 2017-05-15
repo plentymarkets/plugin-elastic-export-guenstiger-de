@@ -3,7 +3,7 @@
 ## v1.0.4 (2017-05-15)
 
 ### Fixed
-- Es wurde ein Fehler behoben, bei dem Varianten nicht in der richtigen Reihenfolge gelisted wurde.
+- Es wurde ein Fehler behoben, bei dem Varianten nicht in der richtigen Reihenfolge gelistet wurden.
 - Es wurde ein Fehler behoben, der dazu geführt hat, dass das Exportformat Texte in der falschen Sprache exportierte.
 
 ## v1.0.3 (2017-05-03)
