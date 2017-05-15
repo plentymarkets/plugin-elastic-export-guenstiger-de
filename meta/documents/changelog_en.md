@@ -1,5 +1,11 @@
 # Release Notes for Elastic Export Guenstiger.de
 
+## v1.0.4 (2017-05-15)
+
+### Fixed
+- An issue was fixed which caused the variations not to be exported in the correct order.
+- An issue was fixed which caused the export format to export texts in the wrong language.
+
 ## v1.0.3 (2017-05-03)
 
 ### Added

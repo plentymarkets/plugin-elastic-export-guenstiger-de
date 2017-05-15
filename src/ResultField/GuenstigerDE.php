@@ -2,6 +2,7 @@
 
 namespace ElasticExportGuenstigerDE\ResultField;
 
+use Plenty\Modules\Cloud\ElasticSearch\Lib\ElasticSearch;
 use Plenty\Modules\Cloud\ElasticSearch\Lib\Source\Mutator\BuiltIn\LanguageMutator;
 use Plenty\Modules\DataExchange\Contracts\ResultFields;
 use Plenty\Modules\Helper\Services\ArrayHelper;
@@ -45,9 +46,9 @@ class GuenstigerDE extends ResultFields
 
         $reference = $settings->get('referrerId') ? $settings->get('referrerId') : -1;
 
-        $this->setOrderByList(['variation.itemId', 'ASC']);
+        $this->setOrderByList(['item.id', ElasticSearch::SORTING_ORDER_ASC]);
 
-        $itemDescriptionFields = ['texts.urlPath'];
+        $itemDescriptionFields = ['texts.urlPath', 'texts.lang'];
 
         $itemDescriptionFields[] = ($settings->get('nameId')) ? 'texts.name' . $settings->get('nameId') : 'texts.name1';
 
@@ -278,6 +279,7 @@ class GuenstigerDE extends ResultFields
             //texts
             'texts' => [
                 'urlPath',
+                'lang',
                 'name1',
                 'name2',
                 'name3',

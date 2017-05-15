@@ -210,22 +210,22 @@ class GuenstigerDE extends CSVPluginGenerator
                 $deliveryTime = $this->getDeliveryTime($variation, $settings);
 
                 // Get base price
-                $basePrice = number_format((float)$this->elasticExportHelper->getBasePrice($variation, $priceList, $settings->get('lang')), 2, '.', '');
+                $basePrice = $this->elasticExportHelper->getBasePrice($variation, $priceList, $settings->get('lang'));
 
                 $data = [
                     'EAN'               => $this->elasticExportHelper->getBarcodeByType($variation, $settings->get('barcode')),
                     'ISBN'              => $this->elasticExportHelper->getBarcodeByType($variation, ElasticExportCoreHelper::BARCODE_ISBN),
                     'HerstellerArtNr'   => strlen($variation['data']['variation']['model']) ? $variation['data']['variation']['model'] : '',
                     'Hersteller'        => $this->elasticExportHelper->getExternalManufacturerName((int)$variation['data']['item']['manufacturer']['id']),
-                    'Produktname'       => $this->elasticExportHelper->getName($variation, $settings, 256),
-                    'Beschreibung'      => $this->elasticExportHelper->getDescription($variation, $settings, 256),
+                    'Produktname'       => $this->elasticExportHelper->getMutatedName($variation, $settings, 256),
+                    'Beschreibung'      => $this->elasticExportHelper->getMutatedDescription($variation, $settings, 256),
                     'Preis'             => number_format((float)$priceList['variationRetailPrice.price'], 2, '.', ''),
-                    'Klick-Out-URL'     => $this->elasticExportHelper->getUrl($variation, $settings, true, false),
+                    'Klick-Out-URL'     => $this->elasticExportHelper->getMutatedUrl($variation, $settings, true, false),
                     'Kategorie'         => $this->elasticExportHelper->getCategory((int)$variation['data']['defaultCategories'][0]['id'], $settings->get('lang'), $settings->get('plentyId')),
                     'Bild-URL'          => $this->elasticExportHelper->getMainImage($variation, $settings),
                     'Lieferzeit'        => $deliveryTime,
                     'Lieferkosten'      => $deliveryCost,
-                    'Grundpreis'        => strlen($basePrice) ? $basePrice : '',
+                    'Grundpreis'        => strlen($basePrice) > 0 ? $basePrice : '',
                 ];
 
                 $this->addCSVContent(array_values($data));
