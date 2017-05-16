@@ -2,7 +2,7 @@
   "name": "ElasticExportGuenstigerDE",
   "namespace": "ElasticExportGuenstigerDE",
   "type": "export",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "license": "GNU AFFERO GENERAL PUBLIC LICENSE Version 3, 19 November 2007",
   "pluginIcon": "icon_plugin_md.png",
   "price": 0.00,
@@ -21,7 +21,7 @@
   "author": "plentymarkets GmbH",
   "authorIcon": "icon_author_xs.png",
   "dependencies": {
-    "ElasticExport": ">=1.0.12"
+    "ElasticExport": ">=1.0.15"
   },
   "serviceProvider": "ElasticExportGuenstigerDE\\ElasticExportGuenstigerDEServiceProvider"
 }
