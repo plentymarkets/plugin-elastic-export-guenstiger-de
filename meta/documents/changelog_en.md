@@ -1,5 +1,10 @@
 # Release Notes for Elastic Export Guenstiger.de
 
+## v1.0.5 (2017-05-29)
+
+### Fixed
+- An issue was fixed which caused elastic search to ignore the set referrers for the barcodes.
+
 ## v1.0.4 (2017-05-15)
 
 ### Fixed
