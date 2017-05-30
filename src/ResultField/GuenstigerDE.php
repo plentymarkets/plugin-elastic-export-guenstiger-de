@@ -6,6 +6,7 @@ use Plenty\Modules\Cloud\ElasticSearch\Lib\ElasticSearch;
 use Plenty\Modules\Cloud\ElasticSearch\Lib\Source\Mutator\BuiltIn\LanguageMutator;
 use Plenty\Modules\DataExchange\Contracts\ResultFields;
 use Plenty\Modules\Helper\Services\ArrayHelper;
+use Plenty\Modules\Item\Search\Mutators\BarcodeMutator;
 use Plenty\Modules\Item\Search\Mutators\DefaultCategoryMutator;
 use Plenty\Modules\Item\Search\Mutators\ImageMutator;
 use Plenty\Modules\Item\Search\Mutators\KeyMutator;
@@ -44,7 +45,7 @@ class GuenstigerDE extends ResultFields
     {
         $settings = $this->arrayHelper->buildMapFromObjectList($formatSettings, 'key', 'value');
 
-        $reference = $settings->get('referrerId') ? $settings->get('referrerId') : -1;
+        $reference = $settings->get('referrerId') ? $settings->get('referrerId') : self::ALL_MARKET_REFERENCE;
 
         $this->setOrderByList(['item.id', ElasticSearch::SORTING_ORDER_ASC]);
 
@@ -112,6 +113,15 @@ class GuenstigerDE extends ResultFields
             $defaultCategoryMutator->setPlentyId($settings->get('plentyId'));
         }
 
+        /**
+         * @var BarcodeMutator $barcodeMutator
+         */
+        $barcodeMutator = pluginApp(BarcodeMutator::class);
+        if($barcodeMutator instanceof BarcodeMutator)
+        {
+            $barcodeMutator->addMarket($reference);
+        }
+
         // Fields
         $fields = [
             [
@@ -155,20 +165,7 @@ class GuenstigerDE extends ResultFields
 
                 //barcodes
                 'barcodes.code',
-                'barcodes.type',
-
-                //attributes
-                'attributes.attributeValueSetId',
-                'attributes.attributeId',
-                'attributes.valueId',
-                'attributes.names.name',
-                'attributes.names.lang',
-
-                //properties
-                'properties.property.id',
-                'properties.property.valueType',
-                'properties.selection.name',
-                'properties.texts.value'
+                'barcodes.type'
             ],
 
             [
@@ -238,13 +235,7 @@ class GuenstigerDE extends ResultFields
             'defaultCategories',
 
             //barcodes
-            'barcodes',
-
-            //attributes
-            'attributes',
-
-            //properties
-            'properties'
+            'barcodes'
         ];
 
         $nestedKeyList['nestedKeys'] = [
@@ -297,23 +288,6 @@ class GuenstigerDE extends ResultFields
             'barcodes' => [
                 'code',
                 'type',
-            ],
-
-            //attributes
-            'attributes' => [
-                'attributeValueSetId',
-                'attributeId',
-                'valueId',
-                'names.name',
-                'names.lang',
-            ],
-
-            //proprieties
-            'properties'    => [
-                'property.id',
-                'property.valueType',
-                'selection.name',
-                'texts.value'
             ]
         ];
 

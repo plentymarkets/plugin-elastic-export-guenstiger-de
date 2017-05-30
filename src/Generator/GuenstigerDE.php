@@ -203,7 +203,7 @@ class GuenstigerDE extends CSVPluginGenerator
             $priceList = $this->priceHelper->getPriceList($variation, $settings);
 
             // Only variations with the Retail Price greater than zero will be handled
-            if($priceList['variationRetailPrice.price'] > 0)
+            if(!is_null($priceList['variationRetailPrice.price']) && $priceList['variationRetailPrice.price'] > 0)
             {
                 // Get delivery costs
                 $deliveryCost = $this->getDeliveryCosts($variation, $settings);
