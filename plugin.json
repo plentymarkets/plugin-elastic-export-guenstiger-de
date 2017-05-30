@@ -20,7 +20,7 @@
   },
   "author": "plentymarkets GmbH",
   "authorIcon": "icon_author_xs.png",
-  "dependencies": {
+  "require": {
     "ElasticExport": ">=1.0.15"
   },
   "serviceProvider": "ElasticExportGuenstigerDE\\ElasticExportGuenstigerDEServiceProvider"
