@@ -1,5 +1,10 @@
 # Release Notes für Elastic Export Guenstiger.de
 
+## v1.0.6 (2017-07-18)
+
+### Behoben
+- Das Plugin Elastic Export ist nun Voraussetzung zur Nutzung des Plugin-Formats GuenstigerDE.
+
 ## v1.0.5 (2017-05-29)
 
 ### Behoben

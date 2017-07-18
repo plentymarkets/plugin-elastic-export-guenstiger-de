@@ -1,5 +1,10 @@
 # Release Notes for Elastic Export Guenstiger.de
 
+## v1.0.6 (2017-07-18)
+
+### Fixed
+- The plugin Elastic Export is now required to use the plugin format GuenstigerDE.
+
 ## v1.0.5 (2017-05-29)
 
 ### Fixed

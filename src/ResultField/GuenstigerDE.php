@@ -165,14 +165,15 @@ class GuenstigerDE extends ResultFields
 
                 //barcodes
                 'barcodes.code',
-                'barcodes.type'
+                'barcodes.type',
             ],
 
             [
                 //mutators
-                $keyMutator,
                 $languageMutator,
-                $defaultCategoryMutator
+                $defaultCategoryMutator,
+                $barcodeMutator,
+                $keyMutator,
             ],
         ];
 
@@ -235,7 +236,7 @@ class GuenstigerDE extends ResultFields
             'defaultCategories',
 
             //barcodes
-            'barcodes'
+            'barcodes',
         ];
 
         $nestedKeyList['nestedKeys'] = [
@@ -288,7 +289,7 @@ class GuenstigerDE extends ResultFields
             'barcodes' => [
                 'code',
                 'type',
-            ]
+            ],
         ];
 
         return $nestedKeyList;

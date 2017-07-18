@@ -5,7 +5,6 @@ namespace ElasticExportGuenstigerDE\Generator;
 use ElasticExport\Helper\ElasticExportCoreHelper;
 use ElasticExport\Helper\ElasticExportStockHelper;
 use ElasticExportGuenstigerDE\Helper\PriceHelper;
-use ElasticExportGuenstigerDE\Helper\StockHelper;
 use Plenty\Modules\DataExchange\Contracts\CSVPluginGenerator;
 use Plenty\Modules\Helper\Services\ArrayHelper;
 use Plenty\Modules\Helper\Models\KeyValue;
