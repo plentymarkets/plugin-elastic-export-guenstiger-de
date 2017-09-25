@@ -1,5 +1,10 @@
 # Release Notes für Elastic Export Guenstiger.de
 
+## v1.0.7 (2017-09-26)
+
+### Geändert
+- Der User Guide wurde aktualisiert.
+
 ## v1.0.6 (2017-07-18)
 
 ### Behoben

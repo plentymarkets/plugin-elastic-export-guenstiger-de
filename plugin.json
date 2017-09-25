@@ -2,14 +2,14 @@
   "name": "ElasticExportGuenstigerDE",
   "namespace": "ElasticExportGuenstigerDE",
   "type": "export",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "license": "GNU AFFERO GENERAL PUBLIC LICENSE Version 3, 19 November 2007",
   "pluginIcon": "icon_plugin_md.png",
   "price": 0.00,
   "description": "This plugin adds the format Guenstiger.de to the Elastic Export.",
   "shortDescription": {
     "de": "Das Plugin ElasticExportGuenstigerDE fügt das Datenformat GuenstigerDE-Plugin zum Elastischen Export hinzu.",
-    "en": "This plugin adds the format GuenstigerDE-Plugin to the Elastic Export."
+    "en": "The plugin ElasticExportGuenstigerDE adds the format GuenstigerDE-Plugin to the Elastic Export."
   },
   "categories": [
     "3523"
