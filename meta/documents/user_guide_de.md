@@ -181,7 +181,7 @@ In der folgenden Tabelle finden Sie spezifische Hinweise zu den Einstellungen, F
         </td>
         <td>
             <b>Pflichtfeld</b><br>
-            Die <b>Standard-Kategorie</b> der Variante.
+            Die <b>Standardkategorie</b> der Variante.
         </td>
     </tr>
     <tr>
