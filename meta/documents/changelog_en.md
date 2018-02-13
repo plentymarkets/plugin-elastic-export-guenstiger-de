@@ -3,7 +3,7 @@
 ## v1.0.8 (2018-02-13)
 
 ### Added
-- The PriceHelper will now consider the new setting "Retail price".
+- The PriceHelper now considers the new setting **Retail price**.
 
 ## v1.0.7 (2017-09-26)
 
