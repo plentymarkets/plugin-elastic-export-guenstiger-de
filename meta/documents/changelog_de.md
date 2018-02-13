@@ -3,7 +3,7 @@
 ## v1.0.8 (2018-02-13)
 
 ### Hinzugefügt
-- Der PriceHelper berücksichtigt nun die Einstellung "Verkaufspreis".
+- Der PriceHelper berücksichtigt nun die Einstellung **Verkaufspreis**.
 
 ## v1.0.7 (2017-09-26)
 
