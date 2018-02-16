@@ -1,5 +1,10 @@
 # Release Notes for Elastic Export Guenstiger.de
 
+## v1.0.8 (2018-02-16)
+
+### Changed
+- Updated plugin short description.
+
 ## v1.0.7 (2017-09-26)
 
 ### Changed
