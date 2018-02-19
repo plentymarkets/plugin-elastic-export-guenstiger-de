@@ -3,9 +3,12 @@
 namespace ElasticExportGuenstigerDE\Helper;
 
 use Plenty\Modules\Helper\Models\KeyValue;
+use Plenty\Modules\Item\SalesPrice\Contracts\SalesPriceRepositoryContract;
 use Plenty\Modules\Item\SalesPrice\Contracts\SalesPriceSearchRepositoryContract;
+use Plenty\Modules\Item\SalesPrice\Models\SalesPrice;
 use Plenty\Modules\Item\SalesPrice\Models\SalesPriceSearchRequest;
 use Plenty\Modules\Item\SalesPrice\Models\SalesPriceSearchResponse;
+use Plenty\Modules\Order\Currency\Contracts\CurrencyConversionSettingsRepositoryContract;
 use Plenty\Plugin\Log\Loggable;
 
 class PriceHelper
@@ -25,18 +28,43 @@ class PriceHelper
      */
     private $salesPriceSearchRequest;
 
-    /**
-     * PriceHelper constructor.
-     *
-     * @param SalesPriceSearchRepositoryContract $salesPriceSearchRepositoryContract
-     * @param SalesPriceSearchRequest $salesPriceSearchRequest
-     */
+	/**
+	 * @var SalesPriceRepositoryContract
+	 */
+	private $salesPriceRepository;
+
+	/**
+	 * @var array
+	 */
+	private $salesPriceCurrencyList = [];
+
+	/**
+	 * @var array
+	 */
+	private $currencyConversionList = [];
+	/**
+	 * @var CurrencyConversionSettingsRepositoryContract
+	 */
+	private $currencyConversionSettingsRepository;
+
+	/**
+	 * PriceHelper constructor.
+	 *
+	 * @param SalesPriceSearchRepositoryContract $salesPriceSearchRepositoryContract
+	 * @param SalesPriceSearchRequest $salesPriceSearchRequest
+	 * @param SalesPriceRepositoryContract $salesPriceRepository
+	 * @param CurrencyConversionSettingsRepositoryContract $currencyConversionSettingsRepository
+	 */
     public function __construct(
         SalesPriceSearchRepositoryContract $salesPriceSearchRepositoryContract,
-        SalesPriceSearchRequest $salesPriceSearchRequest)
+        SalesPriceSearchRequest $salesPriceSearchRequest,
+        SalesPriceRepositoryContract $salesPriceRepository, 
+        CurrencyConversionSettingsRepositoryContract $currencyConversionSettingsRepository)
     {
         $this->salesPriceSearchRepository = $salesPriceSearchRepositoryContract;
         $this->salesPriceSearchRequest = $salesPriceSearchRequest;
+	    $this->salesPriceRepository = $salesPriceRepository;
+	    $this->currencyConversionSettingsRepository = $currencyConversionSettingsRepository;
     }
 
     /**
@@ -57,6 +85,13 @@ class PriceHelper
             $this->salesPriceSearchRequest->type = 'default';
         }
 
+	    if(!is_null($settings->get('liveConversion')) &&
+		    $settings->get('liveConversion') == true &&
+		    count($this->currencyConversionList) == 0)
+	    {
+		    $this->currencyConversionList = $this->currencyConversionSettingsRepository->getCurrencyConversionList();
+	    }
+
         // getting the retail price
         $salesPriceSearch = $this->salesPriceSearchRepository->search($this->salesPriceSearchRequest);
         if($salesPriceSearch instanceof SalesPriceSearchResponse)
@@ -64,11 +99,13 @@ class PriceHelper
 		   if(isset($salesPriceSearch->price) &&
 			   ($settings->get('retailPrice') == self::GROSS_PRICE || is_null($settings->get('retailPrice'))))
 		   {
-			  $variationPrice = (float)$salesPriceSearch->price;
+		   	    $variationPrice = $this->calculatePriceByCurrency($salesPriceSearch, $salesPriceSearch->price, $settings);
+			    $variationPrice = (float)$variationPrice;
 		   }
 		   elseif(isset($salesPriceSearch->priceNet) && $settings->get('retailPrice') == self::NET_PRICE)
 		   {
-			  $variationPrice = (float)$salesPriceSearch->priceNet;
+			   $variationPrice = $this->calculatePriceByCurrency($salesPriceSearch, $salesPriceSearch->price, $settings);
+			   $variationPrice = (float)$variationPrice;
 		   }
         }
 
@@ -76,4 +113,55 @@ class PriceHelper
             'variationRetailPrice.price' => $variationPrice
         );
     }
+
+	/**
+	 * Gets the calculated price for a given currency.
+	 *
+	 * @param SalesPriceSearchResponse $salesPriceSearch
+	 * @param $price
+	 * @param KeyValue $settings
+	 * @return mixed
+	 */
+	private function calculatePriceByCurrency(SalesPriceSearchResponse $salesPriceSearch, $price, KeyValue $settings)
+	{
+		if(!is_null($settings->get('liveConversion')) &&
+			$settings->get('liveConversion') == true &&
+			count($this->currencyConversionList) > 0 &&
+			$price > 0)
+		{
+			if(array_key_exists($salesPriceSearch->salesPriceId, $this->salesPriceCurrencyList) &&
+				$this->salesPriceCurrencyList[$salesPriceSearch->salesPriceId] === true)
+			{
+				$price = $price * $this->currencyConversionList['list'][$salesPriceSearch->currency]['exchange_ratio'];
+				return $price;
+			}
+			elseif(array_key_exists($salesPriceSearch->salesPriceId, $this->salesPriceCurrencyList) &&
+				$this->salesPriceCurrencyList[$salesPriceSearch->salesPriceId] === false)
+			{
+				return $price;
+			}
+
+			$salesPriceData = $this->salesPriceRepository->findById($salesPriceSearch->salesPriceId);
+
+			if($salesPriceData instanceof SalesPrice)
+			{
+				$salePriceCurrencyData = $salesPriceData->currencies->whereIn('currency', [$this->currencyConversionList['default'], "-1"]);
+
+				if(count($salePriceCurrencyData))
+				{
+					$this->salesPriceCurrencyList[$salesPriceSearch->salesPriceId] = true;
+
+					$price = $price * $this->currencyConversionList['list'][$salesPriceSearch->currency]['exchange_ratio'];
+
+					return $price;
+				}
+				else
+				{
+					$this->salesPriceCurrencyList[$salesPriceSearch->salesPriceId] = false;
+				}
+			}
+		}
+
+		return $price;
+	}
 }
