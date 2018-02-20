@@ -1,9 +1,9 @@
 # Release Notes for Elastic Export Guenstiger.de
 
-## v1.0.9 (2018-02-16)
+## v1.0.9 (2018-02-19)
 
-### Changed
-- Updated plugin short description.
+### Added
+- The PriceHelper will now consider the new setting "Live currency conversion".
 
 ## v1.0.8 (2018-02-16)
 
