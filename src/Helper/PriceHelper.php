@@ -9,6 +9,7 @@ use Plenty\Modules\Item\SalesPrice\Models\SalesPrice;
 use Plenty\Modules\Item\SalesPrice\Models\SalesPriceSearchRequest;
 use Plenty\Modules\Item\SalesPrice\Models\SalesPriceSearchResponse;
 use Plenty\Modules\Order\Currency\Contracts\CurrencyConversionSettingsRepositoryContract;
+use Plenty\Modules\Order\Currency\Contracts\CurrencyRepositoryContract;
 use Plenty\Plugin\Log\Loggable;
 
 class PriceHelper
@@ -46,6 +47,10 @@ class PriceHelper
 	 * @var CurrencyConversionSettingsRepositoryContract
 	 */
 	private $currencyConversionSettingsRepository;
+	/**
+	 * @var CurrencyRepositoryContract
+	 */
+	private $currencyRepositoryContract;
 
 	/**
 	 * PriceHelper constructor.
@@ -54,17 +59,20 @@ class PriceHelper
 	 * @param SalesPriceSearchRequest $salesPriceSearchRequest
 	 * @param SalesPriceRepositoryContract $salesPriceRepository
 	 * @param CurrencyConversionSettingsRepositoryContract $currencyConversionSettingsRepository
+	 * @param CurrencyRepositoryContract $currencyRepositoryContract
 	 */
     public function __construct(
         SalesPriceSearchRepositoryContract $salesPriceSearchRepositoryContract,
         SalesPriceSearchRequest $salesPriceSearchRequest,
         SalesPriceRepositoryContract $salesPriceRepository, 
-        CurrencyConversionSettingsRepositoryContract $currencyConversionSettingsRepository)
+        CurrencyConversionSettingsRepositoryContract $currencyConversionSettingsRepository,
+		CurrencyRepositoryContract $currencyRepositoryContract)
     {
         $this->salesPriceSearchRepository = $salesPriceSearchRepositoryContract;
         $this->salesPriceSearchRequest = $salesPriceSearchRequest;
 	    $this->salesPriceRepository = $salesPriceRepository;
 	    $this->currencyConversionSettingsRepository = $currencyConversionSettingsRepository;
+	    $this->currencyRepositoryContract = $currencyRepositoryContract;
     }
 
     /**
@@ -78,11 +86,17 @@ class PriceHelper
     {
         $variationPrice = 0.00;
 
+	    $countryId = $settings->get('destination');
+	    $currency = $this->currencyRepositoryContract->getCountryCurrency($countryId)->currency;
+
         if($this->salesPriceSearchRequest instanceof SalesPriceSearchRequest)
         {
             $this->salesPriceSearchRequest->variationId = $variation['id'];
             $this->salesPriceSearchRequest->referrerId = $settings->get('referrerId');
+	        $this->salesPriceSearchRequest->plentyId = $settings->get('plentyId');
             $this->salesPriceSearchRequest->type = 'default';
+	        $this->salesPriceSearchRequest->countryId = $countryId;
+	        $this->salesPriceSearchRequest->currency = $currency;
         }
 
 	    if(!is_null($settings->get('liveConversion')) &&
