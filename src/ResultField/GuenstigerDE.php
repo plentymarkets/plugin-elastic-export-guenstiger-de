@@ -13,7 +13,7 @@ use Plenty\Modules\Item\Search\Mutators\KeyMutator;
 
 
 /**
- * Class GuenstigerDE
+ * Class ElasticExportGuenstigerDE
  * @package ElasticExportGuenstigerDE\ResultField
  */
 class GuenstigerDE extends ResultFields
@@ -26,7 +26,7 @@ class GuenstigerDE extends ResultFields
     private $arrayHelper;
 
     /**
-     * GuenstigerDE constructor.
+     * ElasticExportGuenstigerDE constructor.
      *
      * @param ArrayHelper $arrayHelper
      */
