@@ -13,7 +13,7 @@ use Plenty\Plugin\Log\Loggable;
 
 
 /**
- * Class GuenstigerDE
+ * Class ElasticExportGuenstigerDE
  * @package ElasticExportGuenstigerDE\Generator
  */
 class GuenstigerDE extends CSVPluginGenerator
@@ -43,7 +43,7 @@ class GuenstigerDE extends CSVPluginGenerator
     private $stockHelper;
 
     /**
-     * GuenstigerDE constructor.
+     * ElasticExportGuenstigerDE constructor.
      *
      * @param ArrayHelper $arrayHelper
      * @param PriceHelper $priceHelper
