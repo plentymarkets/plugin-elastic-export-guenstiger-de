@@ -28,7 +28,7 @@ class ElasticExportGuenstigerDEServiceProvider extends DataExchangeServiceProvid
     public function exports(ExportPresetContainer $container)
     {
         $container->add(
-            'ElasticExportGuenstigerDE-Plugin',
+            'GuenstigerDE-Plugin',
             'ElasticExportGuenstigerDE\ResultField\GuenstigerDE',
             'ElasticExportGuenstigerDE\Generator\GuenstigerDE',
             '',
