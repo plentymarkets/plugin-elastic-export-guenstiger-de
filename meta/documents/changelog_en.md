@@ -1,5 +1,11 @@
 # Release Notes for Elastic Export Guenstiger.de
 
+## v1.0.10 (2018-03-29)
+
+### Changed
+- The class FiltrationService is responsible for the filtration of all variations.
+- Preview images updated.
+
 ## v1.0.9 (2018-03-22)
 
 ### Changed

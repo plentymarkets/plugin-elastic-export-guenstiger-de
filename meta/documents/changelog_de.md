@@ -1,5 +1,11 @@
 # Release Notes für Elastic Export Guenstiger.de
 
+## v1.0.10 (2018-03-29)
+
+### Geändert
+- Die Klasse FiltrationService übernimmt die Filtrierung der Varianten.
+- Vorschaubilder aktualisiert.
+
 ## v1.0.9 (2018-03-22)
 
 ### Geändert

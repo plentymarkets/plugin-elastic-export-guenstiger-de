@@ -2,7 +2,7 @@
   "name": "ElasticExportGuenstigerDE",
   "namespace": "ElasticExportGuenstigerDE",
   "type": "export",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "license": "GNU AFFERO GENERAL PUBLIC LICENSE Version 3, 19 November 2007",
   "pluginIcon": "icon_plugin_md.png",
   "price": 0.00,
@@ -11,13 +11,8 @@
     "de": "Die Integration des Datenformats GuenstigerDE-Plugin ermöglicht die Artikeldatenübertragung zum Preisportal guenstiger.de über den elastischen Export.",
     "en": "The integration of the data format GuenstigerDE-Plugin enables the transfer of item data to the price search engine guenstiger.de via the elastic export."
   },
-  "categories": [
-    "3523"
-  ],
-  "marketplaceName": {
-    "de":"guenstiger.de",
-    "en":"guenstiger.de"
-  },
+  "categories": ["3523"],
+  "marketplaceName": "guenstiger.de",
   "author": "plentymarkets GmbH",
   "authorIcon": "icon_author_xs.png",
   "require": ["ElasticExport"],

@@ -4,6 +4,7 @@ namespace ElasticExportGuenstigerDE\Generator;
 
 use ElasticExport\Helper\ElasticExportCoreHelper;
 use ElasticExport\Helper\ElasticExportStockHelper;
+use ElasticExport\Services\FiltrationService;
 use ElasticExportGuenstigerDE\Helper\PriceHelper;
 use Plenty\Modules\DataExchange\Contracts\CSVPluginGenerator;
 use Plenty\Modules\Helper\Services\ArrayHelper;
@@ -13,7 +14,7 @@ use Plenty\Plugin\Log\Loggable;
 
 
 /**
- * Class ElasticExportGuenstigerDE
+ * Class GuenstigerDE
  * @package ElasticExportGuenstigerDE\Generator
  */
 class GuenstigerDE extends CSVPluginGenerator
@@ -43,17 +44,18 @@ class GuenstigerDE extends CSVPluginGenerator
     private $stockHelper;
 
     /**
-     * ElasticExportGuenstigerDE constructor.
+     * @var FiltrationService
+     */
+    private $filtrationService;
+
+    /**
+     * GuenstigerDE constructor.
      *
      * @param ArrayHelper $arrayHelper
      * @param PriceHelper $priceHelper
      * @param ElasticExportStockHelper $stockHelper
      */
-    public function __construct(
-        ArrayHelper $arrayHelper,
-        PriceHelper $priceHelper,
-        ElasticExportStockHelper $stockHelper
-    )
+    public function __construct(ArrayHelper $arrayHelper, PriceHelper $priceHelper, ElasticExportStockHelper $stockHelper)
     {
         $this->arrayHelper = $arrayHelper;
         $this->priceHelper = $priceHelper;
@@ -72,6 +74,7 @@ class GuenstigerDE extends CSVPluginGenerator
         $this->elasticExportHelper = pluginApp(ElasticExportCoreHelper::class);
 
         $settings = $this->arrayHelper->buildMapFromObjectList($formatSettings, 'key', 'value');
+        $this->filtrationService = pluginApp(FiltrationService::class, [$settings, $filter]);
 
         // Delimiter accepted is PIPE
         $this->setDelimiter(self::DELIMITER);
@@ -129,7 +132,7 @@ class GuenstigerDE extends CSVPluginGenerator
                         }
 
                         // If filtered by stock is set and stock is negative, then skip the variation
-                        if($this->stockHelper->isFilteredByStock($variation, $filter) === true)
+                        if($this->filtrationService->filter($variation))
                         {
                             $this->getLogger(__METHOD__)->info('ElasticExportGuenstigerDE::log.variationNotPartOfExportStock', [
                                 'VariationId' => (string)$variation['id']
