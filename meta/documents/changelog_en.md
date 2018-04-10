@@ -1,11 +1,18 @@
 # Release Notes for Elastic Export Guenstiger.de
 
+## v1.0.10 (2018-04-05)
+
+### Added
+- The PriceHelper will now consider the new setting "Live currency conversion".
+
+### Changed
+- The class FiltrationService is responsible for the filtration of all variations.
+- Preview images updated.
+
 ## v1.0.9 (2018-03-22)
 
 ### Changed
 - Extended the plugin short description.
-
-## v1.0.8 (2018-02-13)
 
 ### Added
 - The PriceHelper now considers the new setting **Retail price**.

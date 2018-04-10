@@ -1,5 +1,14 @@
 # Release Notes für Elastic Export Guenstiger.de
 
+## v1.0.11 (2018-04-05)
+
+### Hinzugefügt
+- Der PriceHelper berücksichtigt nun die Einstellung "Währung live umrechnen".
+
+### Geändert
+- Die Klasse FiltrationService übernimmt die Filtrierung der Varianten.
+- Vorschaubilder aktualisiert.
+
 ## v1.0.9 (2018-03-22)
 
 ### Geändert
@@ -9,8 +18,6 @@
 
 ### Geändert
 - Plugin-Kurzbeschreibung wurde angepasst.
-
-## v1.0.8 (2018-02-13)
 
 ### Hinzugefügt
 - Der PriceHelper berücksichtigt nun die Einstellung **Verkaufspreis**.
