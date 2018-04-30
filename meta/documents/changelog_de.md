@@ -1,5 +1,10 @@
 # Release Notes für Elastic Export Guenstiger.de
 
+## v1.0.12 (2018-04-30)
+
+### Geändert
+- Laravel 5.5 update.
+
 ## v1.0.11 (2018-04-05)
 
 ### Hinzugefügt
