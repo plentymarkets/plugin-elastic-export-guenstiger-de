@@ -74,7 +74,7 @@ class GuenstigerDE extends CSVPluginGenerator
         $this->elasticExportHelper = pluginApp(ElasticExportCoreHelper::class);
 
         $settings = $this->arrayHelper->buildMapFromObjectList($formatSettings, 'key', 'value');
-        $this->filtrationService = pluginApp(FiltrationService::class, [$settings, $filter]);
+		$this->filtrationService = pluginApp(FiltrationService::class, ['settings' => $settings, 'filterSettings' => $filter]);
 
         // Delimiter accepted is PIPE
         $this->setDelimiter(self::DELIMITER);
