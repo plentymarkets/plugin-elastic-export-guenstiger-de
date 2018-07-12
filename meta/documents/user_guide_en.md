@@ -10,7 +10,7 @@ Guenstiger.de is a German price comparison portal that also offers customer opin
 
 By installing this plugin you will receive the export format **GuenstigerDE-Plugin**. Use this format to exchange data between plentymarkets and Guenstiger.de. It is required to install the Plugin **Elastic export** from the plentyMarketplace first before you can use the format **GuenstigerDE-Plugin** in plentymarkets.
 
-Once both plugins are installed, you can create the export format **GuenstigerDE-Plugin**. Refer to the [Exporting data formats for price search engines](https://knowledge.plentymarkets.com/en/basics/data-exchange/exporting-data#30) page of the manual for further details about the individual format settings.
+Once both plugins are installed, you can create the export format **GuenstigerDE-Plugin**. Refer to the [Exporting data formats for price search engines](https://knowledge.plentymarkets.com/en/basics/data-exchange/export-import/exporting-data#30) page of the manual for further details about the individual format settings.
 
 Creating a new export format:
 
@@ -24,7 +24,7 @@ The following table lists details for settings, format settings and recommended 
 
 | **Setting**                                           | **Explanation** |
 | :---                                                  | :--- |
-| **Settings**                                          | 
+| **Settings**                                          |  |
 | **Name**                                              | Enter a name. The export format will be listed under this name in the overview within the **Exports** tab. |
 | **Type**                                              | Select the type **Item** from the drop-down list. |
 | **Format**                                            | Select **GuenstigerDE-Plugin**. |
@@ -33,9 +33,9 @@ The following table lists details for settings, format settings and recommended 
 | **Provisioning**                                      | Select **URL**. This option generates a token for authentication in order to allow external access. |
 | **File name**                                         | The file name must have the ending **.csv** for Guenstiger.de to be able to import the file successfully. |
 | **Token, URL**                                        | If you have selected the option **URL** under **Provisioning**, then click on **Generate token**. The token will be entered automatically. When the token is generated under **Token**, the URL is entered automatically. |
-| **Item filters**                                      |
+| **Item filters**                                      | |
 | **Add item filters**                                  | Select an item filter from the drop-down list and click on **Add**. There are no filters set in default. It is possible to add multiple item filters from the drop-down list one after the other.<br/> **Variations** = Select **Transfer all** or **Only transfer main variations**.<br/> **Markets** = Select one market, several or **ALL**.<br/> The availability for all markets selected here has to be saved for the item. Otherwise, the export will not take place.<br/> **Currency** = Select a currency.<br/> **Category** = Activate to transfer the item with its category link. Only items belonging to this category will be exported.<br/> **Image** = Activate to transfer the item with its image. Only items with images will be transferred.<br/> **Client** = Select client.<br/> **Stock** = Select which stocks you want to export.<br/> **Flag 1 - 2** = Select the flag.<br/> **Manufacturer** = Select one, several or **ALL** manufacturers.<br/> **Active** = Only active variations will be exported. |
-| **Format settings**                                   |
+| **Format settings**                                   | |
 | **Product URL**                                       | Choose wich URL should be transferred to the price comparison portal, the item’s URL or the variation’s URL. Variation SKUs can only be transferred in combination with the Ceres store. |
 | **Client**                                            | Select a client. This setting is used for the URL structure. |
 | **URL parameter**                                     | Enter a suffix for the product URL if this is required for the export. If you have activated the transfer option for the product URL further up, then this character string will be added to the product URL. |
@@ -52,6 +52,7 @@ The following table lists details for settings, format settings and recommended 
 | **Stockbuffer**                                       | This option does not affect this format. |
 | **Stock for variations without stock limitation**     | This option does not affect this format. |
 | **Stock for variations with no stock administration** | This option does not affect this format. |
+| **Live currency conversion**                          | Activate this option to convert the price into the currency of the selected country of delivery. The price has to be released for the corresponding currency. |
 | **Retail price**                                      | Select gross price or net price from the drop-down list. |
 | **Offer price**                                       | Activate to transfer the offer price |
 | **RRP**                                               | Activate to transfer the RRP. |

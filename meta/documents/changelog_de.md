@@ -1,11 +1,16 @@
 # Release Notes für Elastic Export Guenstiger.de
 
-## v1.0.12 (2018-04-30)
+## v1.0.12 (2018-07-12)
+
+### Geändert
+- Ein fehlerhafter Link im User Guide wurde korrigiert.
+
+## v1.0.11 (2018-04-30)
 
 ### Geändert
 - Laravel 5.5 Update.
 
-## v1.0.11 (2018-04-05)
+## v1.0.10 (2018-04-05)
 
 ### Hinzugefügt
 - Der PriceHelper berücksichtigt nun die Einstellung "Währung live umrechnen".
