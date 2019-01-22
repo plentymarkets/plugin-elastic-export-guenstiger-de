@@ -10,7 +10,7 @@ Guenstiger.de is a German price comparison portal that also offers customer opin
 
 By installing this plugin you will receive the export format **GuenstigerDE-Plugin**. Use this format to exchange data between plentymarkets and Guenstiger.de. It is required to install the Plugin **Elastic export** from the plentyMarketplace first before you can use the format **GuenstigerDE-Plugin** in plentymarkets.
 
-Once both plugins are installed, you can create the export format **GuenstigerDE-Plugin**. Refer to the [Exporting data formats for price search engines](https://knowledge.plentymarkets.com/en/basics/data-exchange/export-import/exporting-data#30) page of the manual for further details about the individual format settings.
+Once both plugins are installed, you can create the export format **GuenstigerDE-Plugin**. Refer to the [Elastic Export](https://knowledge.plentymarkets.com/en/basics/data-exchange/elastic-export) page of the manual for further details about the individual format settings.
 
 Creating a new export format:
 
