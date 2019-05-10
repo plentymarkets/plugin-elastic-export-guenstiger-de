@@ -1,5 +1,10 @@
 # Release Notes für Elastic Export Guenstiger.de
 
+## v1.0.14 (2019-05-10)
+
+### Behoben
+- Die angegebene Lieferzeit wurde nicht korrekt exportiert.
+
 ## v1.0.13 (2019-01-22)
 
 ### Geändert
