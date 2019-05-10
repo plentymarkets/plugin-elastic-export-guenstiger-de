@@ -1,5 +1,10 @@
 # Release Notes for Elastic Export Guenstiger.de
 
+## v1.0.14 (2019-05-10)
+
+### Fixed
+- The specified shipping time was not exported correctly.
+
 ## v1.0.13 (2019-01-22)
 
 ### Changed
