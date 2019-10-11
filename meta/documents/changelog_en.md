@@ -1,5 +1,10 @@
 # Release Notes for Elastic Export Guenstiger.de
 
+## v1.0.15 (2019-10-10)
+
+### Fixed
+- The user guide was updated (changed form of address, corrected broken links).
+
 ## v1.0.14 (2019-05-10)
 
 ### Fixed

@@ -10,22 +10,22 @@ Guenstiger.de is a German price comparison portal that also offers customer opin
 
 By installing this plugin you will receive the export format **GuenstigerDE-Plugin**. Use this format to exchange data between plentymarkets and Guenstiger.de. It is required to install the Plugin **Elastic export** from the plentyMarketplace first before you can use the format **GuenstigerDE-Plugin** in plentymarkets.
 
-Once both plugins are installed, you can create the export format **GuenstigerDE-Plugin**. Refer to the [Elastic Export](https://knowledge.plentymarkets.com/en/basics/data-exchange/elastic-export) page of the manual for further details about the individual format settings.
+Once both plugins are installed, you can create the export format **GuenstigerDE-Plugin**. Refer to the [Elastic Export](https://knowledge.plentymarkets.com/en/data/exporting-data/elastic-export) page of the manual for further details about the individual format settings.
 
 Creating a new export format:
 
 1. Go to **Data » Elastic export**.
 2. Click on **New export**.
 3. Carry out the settings as desired. Pay attention to the information given in table 1.
-4. **Save** the settings. 
-→ The export format will be given an ID and it will appear in the overview within the **Exports** tab.
+4. **Save** the settings.<br/> 
+→ The export format is given an ID and it appears in the overview within the **Exports** tab.
 
 The following table lists details for settings, format settings and recommended item filters for the format GuenstigerDE-Plugin.
 
 | **Setting**                                           | **Explanation** |
 | :---                                                  | :--- |
 | **Settings**                                          |  |
-| **Name**                                              | Enter a name. The export format will be listed under this name in the overview within the **Exports** tab. |
+| **Name**                                              | Enter a name. The export format is listed under this name in the overview within the **Exports** tab. |
 | **Type**                                              | Select the type **Item** from the drop-down list. |
 | **Format**                                            | Select **GuenstigerDE-Plugin**. |
 | **Limit**                                             | Enter a number. If you want to transfer more than 9,999 data records to the price search engine, then the output file will not be generated again for another 24 hours. This is to save resources. If more than 9,999 data records are necessary, the setting **Generate cache file** has to be active. |
@@ -39,8 +39,8 @@ The following table lists details for settings, format settings and recommended 
 | **Product URL**                                       | Choose wich URL should be transferred to the price comparison portal, the item’s URL or the variation’s URL. Variation SKUs can only be transferred in combination with the Ceres store. |
 | **Client**                                            | Select a client. This setting is used for the URL structure. |
 | **URL parameter**                                     | Enter a suffix for the product URL if this is required for the export. If you have activated the transfer option for the product URL further up, then this character string will be added to the product URL. |
-| **Order referrer**                                    | Choose the order referrer that should be assigned during the order import from the drop-down list. |
-| **Marketplace account**                               | Select the market account from the drop-down list. The selected referrer is added to the product URL so that sales can be analysed later. |
+| **Order referrer**                                    | Choose the order referrer that should be assigned during the order import from the drop-down list. The selected referrer is added to the product URL so that sales can be analysed later. |
+| **Marketplace account**                               | Select the market account from the drop-down list. |
 | **Language**                                          | Select the language from the drop-down list. |
 | **Item name**                                         | Select **Name 1**, **Name 2** or **Name 3**. These names are saved in the **Texts** tab of the item. Enter a number into the **Maximum number of characters (def. Text)** field if desired. This specifies how many characters should be exported for the item name. |
 | **Preview text**                                      | Select the text that you want to transfer as preview text.<br/> Enter a number into the **Maximum number of characters (def. text)** field if desired. This will specify how many characters should be exported for the item name.<br/> Activate the option **Remove HTML tags** if you want HTML tags to be removed during the export.<br/> If you only want to allow specific HTML tags to be exported, then enter these tags into the field **Permitted HTML tags, separated by comma (def. Text)**. Use commas to separate multiple tags. |
@@ -58,7 +58,7 @@ The following table lists details for settings, format settings and recommended 
 | **RRP**                                               | Activate to transfer the RRP. |
 | **Shipping costs**                                    | Activate this option if you want to use the shipping costs that are saved in a configuration. If this option is activated, then you will be able to select the configuration and the payment method from the drop-down lists.<br/> Activate the option **Transfer flat rate shipping charge** if you want to use a fixed shipping charge. If this option is activated, a value has to be entered in the line underneath. |
 | **VAT note**                                          | This option does not affect this format. |
-| **Item availability**                                 | Activate the **overwrite** option and enter item availabilities into the fields **1** to **10**. The fields represent the IDs of the availabilities. This will overwrite the item availabilities that are saved in the menu **System » Item » Availability**. |
+| **Item availability**                                 | Activate the **overwrite** option and enter item availabilities into the fields **1** to **10**. The fields represent the IDs of the availabilities. This will overwrite the item availabilities that are saved in the menu **Setup » Item » Availability**. |
 
 ## 3 Available columns for the export file
 
@@ -67,7 +67,7 @@ The following table lists details for settings, format settings and recommended 
 | EAN                    | **Required**<br/> According to the format setting **Barcode**. |
 | ISBN                   | The **ISBN** of the variation. |
 | HerstellerArtNr        | The **model** of the variation. |
-| Hersteller             | **Required**<br/> The **name of the manufacturer** of the item. The **external name** within **Systms » Items » Manufacturers** will be preferred if existing. |
+| Hersteller             | **Required**<br/> The **name of the manufacturer** of the item. The **external name** within **Setup » Items » Manufacturers** is preferred if existing. |
 | Produktname            | **Required**<br/> According to the format setting **Item name**. |
 | Beschreibung           | **Required**<br/> According to the format setting **Description**. |
 | Preis                  | **Required**<br/> The **retail price** of the variation. |
