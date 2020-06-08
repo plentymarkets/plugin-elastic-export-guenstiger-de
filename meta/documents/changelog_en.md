@@ -1,5 +1,10 @@
 # Release Notes for Elastic Export Guenstiger.de
 
+## v1.0.16 (2020-06-09)
+
+### Changed
+- Deleted the plugin description and inserted link to plentymarkets manual instead.
+
 ## v1.0.15 (2019-10-10)
 
 ### Fixed
@@ -91,6 +96,6 @@
 - Updated plugin icons.
 
 ## v1.0.0 (2017-02-22)
- 
+
 ### Added
 - Added initial plugin files
