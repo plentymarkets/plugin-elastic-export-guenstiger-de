@@ -1,5 +1,10 @@
 # Release Notes for Elastic Export Guenstiger.de
 
+## v1.0.17 (2022-05-24)
+
+### Changed
+- UPDATE - Additional updates to ensure compatibility with PHP 8.
+
 ## v1.0.16 (2020-06-09)
 
 ### Changed
